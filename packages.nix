@@ -18,6 +18,7 @@
     pkgs.go
     pkgs.gcc
     pkgs.nodejs
+		pkgs.bun
     pkgs.nixd
     pkgs.nil
     pkgs.nixfmt-classic
@@ -60,8 +61,7 @@
     pkgs.bitwarden-desktop
     pkgs.calibre
     pkgs.obs-studio
-    # pkgs.owncloud-client
-    pkgs.syncthing
+    pkgs.syncthing 
     pkgs.syncthingtray
     pkgs.shotcut
     pkgs.thunderbird
@@ -87,7 +87,7 @@
     pkgs.ubuntu_font_family
 
     # Nerd Fonts
-    # pkgs.nerd-fonts.hack
+    pkgs.nerd-fonts.hack
     pkgs.nerd-fonts.jetbrains-mono
     pkgs.nerd-fonts.geist-mono
 
@@ -149,22 +149,29 @@
   ];
 
   gnome = [];
-  wayland = [];
-  hyprland = [
-    pkgs.cliphist
-    pkgs.grim
-    pkgs.grimblast
-    pkgs.hyprcursor
-    pkgs.hypridle
-    pkgs.hyprland-protocols
+
+  wayland = [
+		pkgs.udiskie
     pkgs.rofi-wayland
-    pkgs.slurp
-    pkgs.swappy
-    pkgs.swaynotificationcenter
-    pkgs.wl-clipboard
     pkgs.wlogout
     pkgs.wlr-randr
     pkgs.wlsunset
+		# clipboard
+    pkgs.cliphist
+    pkgs.wl-clipboard
+		# scrot
+    pkgs.grim
+    pkgs.grimblast
+    pkgs.slurp
+    pkgs.swappy
+	];
+
+  hyprland = [
+    pkgs.hyprcursor
+    pkgs.hypridle
+    pkgs.hyprpicker
+    pkgs.hyprland-protocols
+    pkgs.swaynotificationcenter
 
     inputs.swww.packages.${pkgs.system}.swww
   ];
