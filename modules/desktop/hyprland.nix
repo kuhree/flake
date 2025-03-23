@@ -50,8 +50,8 @@ in {
       graphics = {
         enable = true;
         enable32Bit = true;
-        package = inputs.hyprland.inputs.nixpkgs.legacyPackages.${system}.mesa.drivers;
-        package32 = inputs.hyprland.inputs.nixpkgs.legacyPackages.${system}.pkgsi686Linux.mesa.drivers;
+        package = inputs.hyprland.inputs.nixpkgs.legacyPackages.${system}.mesa;
+        package32 = inputs.hyprland.inputs.nixpkgs.legacyPackages.${system}.pkgsi686Linux.mesa;
       };
     };
 
