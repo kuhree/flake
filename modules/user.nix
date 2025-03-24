@@ -22,10 +22,12 @@ in {
           initialPassword = "nixos";
           description = "good vibes...";
           extraGroups = [
-            "wheel"
             "abdusers"
             "audio"
+            "docker"
             "input"
+            "kvm"
+            "libvirtd"
             "lp"
             "networkmanager"
             "nix"
@@ -34,9 +36,8 @@ in {
             "systemd-journal"
             "vboxusers"
             "video"
+            "wheel"
             "wireshark"
-            "libvirtd"
-            "docker"
           ];
         };
       };

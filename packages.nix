@@ -18,7 +18,7 @@
     pkgs.go
     pkgs.gcc
     pkgs.nodejs
-		pkgs.bun
+    pkgs.bun
     pkgs.nixd
     pkgs.nil
     pkgs.nixfmt-classic
@@ -61,7 +61,7 @@
     pkgs.bitwarden-desktop
     pkgs.calibre
     pkgs.obs-studio
-    pkgs.syncthing 
+    pkgs.syncthing
     pkgs.syncthingtray
     pkgs.shotcut
     pkgs.thunderbird
@@ -151,20 +151,20 @@
   gnome = [];
 
   wayland = [
-		pkgs.udiskie
+    pkgs.udiskie
     pkgs.rofi-wayland
     pkgs.wlogout
     pkgs.wlr-randr
     pkgs.wlsunset
-		# clipboard
+    # clipboard
     pkgs.cliphist
     pkgs.wl-clipboard
-		# scrot
+    # scrot
     pkgs.grim
     pkgs.grimblast
     pkgs.slurp
     pkgs.swappy
-	];
+  ];
 
   hyprland = [
     pkgs.hyprcursor
