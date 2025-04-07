@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ../../modules/desktop/hyprland.nix
+    ../../modules/desktop/gnome.nix
     ../../profiles/workstation.nix
     ./hardware-configuration.nix
   ];
@@ -8,10 +9,10 @@
   networking.hostName = "thinkpad";
   kHyprland = {
     enable = true;
+		greetd = true;
   };
   kWorkstation = {
     enable = true;
-    greetd = true;
     hardware = {
       lid = true;
       intel = true;
@@ -32,5 +33,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

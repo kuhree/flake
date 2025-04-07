@@ -12,7 +12,6 @@ in {
     environment.pathsToLink = ["/libexec"];
     services = {
       xserver = {
-        enable = true; # Enable X11
 
         desktopManager = {xterm = {enable = false;};};
         displayManager = {defaultSession = "none+i3";};

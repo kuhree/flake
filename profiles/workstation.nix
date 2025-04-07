@@ -10,7 +10,6 @@
 in {
   options.kWorkstation = {
     enable = lib.mkEnableOption "workstation setup";
-    greetd = lib.mkEnableOption "greetd";
     hardware = {
       keyboard = lib.mkEnableOption "qmk/via for keyboard(s)";
       lid = lib.mkEnableOption "support for laptop lids";
@@ -140,24 +139,7 @@ in {
         enable = true;
         interval = "weekly";
       };
-
-      greetd = {
-        enable = cfg.greetd; # Enable the greetd desktopManager
-        vt = 3;
-        settings = {
-          default_session = {
-            user = kVars.username;
-            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-session --cmd '${pkgs.uwsm}/bin/uwsm start default'";
-          };
-        };
-      };
     };
-
-    environment.etc."greetd/environments".text = ''
-      bash
-      zsh
-      uwsm
-    '';
 
     programs = {
       mtr = {enable = true;};

@@ -3,13 +3,17 @@
   config,
   pkgs,
   inputs,
-  kPkgs,
   system,
+  kPkgs,
+  kVars,
   ...
 }: let
   cfg = config.kHyprland;
 in {
-  options.kHyprland = {enable = lib.mkEnableOption "enable hyprland";};
+  options.kHyprland = {
+		enable = lib.mkEnableOption "enable hyprland";
+		greetd = lib.mkEnableOption "enable greetd display manager";
+	};
 
   config = lib.mkIf cfg.enable {
     # Extra Portal Configuration
@@ -24,6 +28,17 @@ in {
     services = {
       xserver = {
         enable = false; # Disable X11 in favor of wayland
+      };
+
+      greetd = {
+        enable = cfg.greetd; # Enable the greetd desktopManager
+        vt = 3;
+        settings = {
+          default_session = {
+            user = kVars.username;
+            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-session --cmd '${pkgs.uwsm}/bin/uwsm start default'";
+          };
+        };
       };
     };
 
@@ -42,6 +57,12 @@ in {
         XDG_SESSION_TYPE = "wayland";
         _JAVA_AWT_WM_NONREPARENTING = "1";
       };
+
+			etc."greetd/environments".text = ''
+				bash
+				zsh
+				uwsm
+			'';
 
       systemPackages = kPkgs.wayland ++ kPkgs.hyprland;
     };
