@@ -1,20 +1,18 @@
 {...}: {
   imports = [
-    ../../modules/desktop/hyprland.nix
-    ../../modules/desktop/gnome.nix
     ../../profiles/workstation.nix
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "thinkpad";
-  kHyprland = {
-    enable = true;
-		greetd = true;
-  };
   kWorkstation = {
     enable = true;
+    hostname = "thinkpad";
+    login = "greetd";
+    desktop = "hyprland";
+    extras = {enable = true;};
+
     hardware = {
-      lid = true;
+      laptop = true;
       intel = true;
       keyboard = true;
     };
@@ -23,8 +21,6 @@
       qemu = true;
       docker = true;
     };
-
-    extras = {enable = true;};
   };
 
   # This value determines the NixOS release from which the default

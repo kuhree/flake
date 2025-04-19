@@ -10,7 +10,11 @@ in {
   options.kNix = {enable = lib.mkEnableOption "enable nixos config";};
 
   config = lib.mkIf cfg.enable {
-    nixpkgs = {config = {allowUnfree = true;};};
+    nixpkgs = {
+      config = {
+        allowUnfree = true;
+      };
+    };
 
     nix = {
       package = pkgs.lix;
@@ -34,6 +38,7 @@ in {
         accept-flake-config = true;
         auto-optimise-store = true;
         builders-use-substitutes = true; # use binary cache, its not gentoo
+        http-connections = 20;
         keep-derivations = true;
         keep-outputs = true;
         log-lines = 20;
@@ -43,11 +48,15 @@ in {
         keep-going = true;
         sandbox = true;
         warn-dirty = false;
+        show-trace = true;
 
         flake-registry = "/etc/nix/registry.json";
         commit-lockfile-summary = "chore: Update flake.lock";
         experimental-features = ["nix-command" "flakes" "recursive-nix" "ca-derivations"];
-        substituters = ["https://cache.nixos.org" "https://hyprland.cachix.org"];
+        substituters = [
+          "https://cache.nixos.org"
+          "https://nix-community.cachix.org"
+        ];
         trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="

@@ -3,12 +3,13 @@
   config,
   ...
 }: let
-  cfg = config.kLid;
+  cfg = config.kLaptop;
 in {
-  options.kLid = {enable = lib.mkEnableOption "enable kLid";};
+  options.kLaptop = {enable = lib.mkEnableOption "enable laptop (lid/touchpad)";};
 
   config = lib.mkIf cfg.enable {
     services = {
+      libinput = {enable = true;}; # Touchpad
       logind = {
         lidSwitch = "suspend";
         lidSwitchExternalPower = "suspend";

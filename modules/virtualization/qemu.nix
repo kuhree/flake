@@ -9,7 +9,12 @@ in {
   options.kQEMU = {enable = lib.mkEnableOption "enable virtualization";};
 
   config = lib.mkIf cfg.enable {
-    environment = {systemPackages = [pkgs.qemu pkgs.dive pkgs.lazydocker];};
+    environment = {
+      systemPackages = [
+        pkgs.qemu
+        pkgs.dive
+      ];
+    };
 
     virtualisation = {
       libvirtd = {

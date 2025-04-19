@@ -1,7 +1,6 @@
 {
-  pkgs,
   inputs,
-  system,
+  pkgs,
   ...
 }: {
   dev = [
@@ -9,8 +8,6 @@
     pkgs.ansible
     pkgs.clang
     pkgs.gnumake
-    pkgs.opentofu
-    pkgs.packer
     pkgs.lazydocker
     pkgs.lazygit
 
@@ -25,7 +22,7 @@
     pkgs.python3
     pkgs.cargo
     pkgs.rustc
-    inputs.alejandra.defaultPackage.${system}
+    pkgs.alejandra # inputs.alejandra.defaultPackage.${pkgs.system}
   ];
 
   shell = [
@@ -57,25 +54,6 @@
     pkgs.zsh
   ];
 
-  gui = [
-    pkgs.bitwarden-desktop
-    pkgs.calibre
-    pkgs.obs-studio
-    pkgs.syncthing
-    pkgs.syncthingtray
-    pkgs.shotcut
-    pkgs.thunderbird
-    pkgs.brave
-
-    # Unfree
-    pkgs.obsidian
-    pkgs.vesktop
-
-    # Unstable
-    inputs.zen-browser.packages."${system}".beta
-    inputs.ghostty.packages."${system}".default
-  ];
-
   fonts = [
     # UI
     pkgs.inter
@@ -98,6 +76,18 @@
     pkgs.noto-fonts
     pkgs.noto-fonts-cjk-sans
     pkgs.noto-fonts-emoji
+  ];
+
+  gui = [
+    inputs.zen-browser.packages."${pkgs.system}".beta
+    pkgs.bitwarden-desktop
+    pkgs.brave
+    pkgs.ghostty # inputs.ghostty.packages."${pkgs.system}".default
+    pkgs.obs-studio
+    pkgs.obsidian
+    pkgs.syncthing
+    pkgs.syncthingtray
+    pkgs.vesktop
   ];
 
   utils = [
@@ -150,9 +140,14 @@
 
   gnome = [];
 
-  wayland = [
-    pkgs.udiskie
+  hyprland = [
+    pkgs.hyprcursor
+    pkgs.hypridle
+    pkgs.hyprland-protocols
+    pkgs.hyprpicker
     pkgs.rofi-wayland
+    pkgs.swaynotificationcenter
+    pkgs.swww
     pkgs.wlogout
     pkgs.wlr-randr
     pkgs.wlsunset
@@ -166,13 +161,9 @@
     pkgs.swappy
   ];
 
-  hyprland = [
-    pkgs.hyprcursor
-    pkgs.hypridle
-    pkgs.hyprpicker
-    pkgs.hyprland-protocols
-    pkgs.swaynotificationcenter
+  x11 = [];
 
-    inputs.swww.packages.${pkgs.system}.swww
+  wayland = [
+    pkgs.udiskie
   ];
 }

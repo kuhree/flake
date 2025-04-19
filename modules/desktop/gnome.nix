@@ -13,15 +13,16 @@ in {
   config = lib.mkIf cfg.enable {
     services = {
       xserver = {
-        displayManager.gdm.enable = true; # Enable the gnome desktopManager
         desktopManager.gnome = {
-          enable = true; # Enable the GNOME Desktop Environment.
+          enable = true;
         };
       };
 
       gnome = {gnome-keyring = {enable = true;};};
     };
 
-    environment = {systemPackages = kPkgs.gnome;};
+    environment = {
+      systemPackages = kPkgs.gnome;
+    };
   };
 }

@@ -3,7 +3,6 @@
   config,
   pkgs,
   inputs,
-  system,
   kPkgs,
   kVars,
   ...
@@ -11,9 +10,8 @@
   cfg = config.kHyprland;
 in {
   options.kHyprland = {
-		enable = lib.mkEnableOption "enable hyprland";
-		greetd = lib.mkEnableOption "enable greetd display manager";
-	};
+    enable = lib.mkEnableOption "enable hyprland";
+  };
 
   config = lib.mkIf cfg.enable {
     # Extra Portal Configuration
@@ -31,14 +29,20 @@ in {
       };
 
       greetd = {
-        enable = cfg.greetd; # Enable the greetd desktopManager
-        vt = 3;
         settings = {
           default_session = {
             user = kVars.username;
             command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-session --cmd '${pkgs.uwsm}/bin/uwsm start default'";
           };
         };
+      };
+    };
+
+    nix = {
+      settings = {
+        substituters = [
+          "https://hyprland.cachix.org"
+        ];
       };
     };
 
@@ -58,11 +62,11 @@ in {
         _JAVA_AWT_WM_NONREPARENTING = "1";
       };
 
-			etc."greetd/environments".text = ''
-				bash
-				zsh
-				uwsm
-			'';
+      etc."greetd/environments".text = ''
+        bash
+        zsh
+        uwsm
+      '';
 
       systemPackages = kPkgs.wayland ++ kPkgs.hyprland;
     };
@@ -71,8 +75,10 @@ in {
       graphics = {
         enable = true;
         enable32Bit = true;
-        package = inputs.hyprland.inputs.nixpkgs.legacyPackages.${system}.mesa;
-        package32 = inputs.hyprland.inputs.nixpkgs.legacyPackages.${system}.pkgsi686Linux.mesa;
+
+        # If using the flake
+        # package = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system}.mesa;
+        # package32 = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system}.pkgsi686Linux.mesa;
       };
     };
 
@@ -81,14 +87,15 @@ in {
       hyprland = {
         enable = true; # Install hyprland
         withUWSM = true; # Systemd-based session
-        package = inputs.hyprland.packages.${system}.hyprland.override {
-          enableXWayland = true;
-          legacyRenderer = false; # Enable for older GPUs
-          withSystemd = true;
-        };
 
-        portalPackage =
-          inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
+        # Uses Hyprland Flake
+        # package = inputs.hyprland.packages.${pkgs.system}.hyprland.override {
+        #   enableXWayland = true;
+        #   legacyRenderer = false; # Enable for older GPUs
+        #   withSystemd = true;
+        # };
+        # Keeps Hyprland flake & portal pkgs in sync
+        # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
 
         xwayland = {
           enable = true;

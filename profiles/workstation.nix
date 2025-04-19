@@ -3,16 +3,37 @@
   lib,
   pkgs,
   kPkgs,
-  kVars,
   ...
 }: let
   cfg = config.kWorkstation;
 in {
   options.kWorkstation = {
     enable = lib.mkEnableOption "workstation setup";
+
+    hostname = lib.mkOption {
+      default = "nixos";
+      example = "thinkpad";
+      description = "the hostname of the device";
+      type = lib.types.str;
+    };
+
+    login = lib.mkOption {
+      default = "greetd";
+      example = "greetd";
+      description = "the display manager to use (greetd/gdm/lightdm/sddm)";
+      type = lib.types.enum ["greetd" "gdm" "lightdm" "sddm"];
+    };
+
+    desktop = lib.mkOption {
+      default = "gnome";
+      example = "gnome";
+      description = "the desktop to use (greetd/gdm/lightdm/sddm)";
+      type = lib.types.enum ["gnome" "i3" "hyprland"];
+    };
+
     hardware = {
       keyboard = lib.mkEnableOption "qmk/via for keyboard(s)";
-      lid = lib.mkEnableOption "support for laptop lids";
+      laptop = lib.mkEnableOption "support for laptops";
       nvidia = lib.mkEnableOption "nvidia drivers";
       intel = lib.mkEnableOption "intel drivers";
     };
@@ -26,22 +47,25 @@ in {
   };
 
   imports = [
-    ../modules/apps/firefox.nix
-    ../modules/apps/steam.nix
     ../modules/boot.nix
     ../modules/fonts.nix
-    ../modules/hardware/audio.nix
-    ../modules/hardware/bluetooth.nix
-    ../modules/hardware/keyboard.nix
-    ../modules/hardware/intel.nix
-    ../modules/hardware/lid.nix
-    ../modules/hardware/nvidia.nix
     ../modules/locale.nix
     ../modules/networking.nix
     ../modules/nix.nix
     ../modules/security.nix
     ../modules/shell.nix
     ../modules/user.nix
+    ../modules/apps/firefox.nix
+    ../modules/apps/steam.nix
+    ../modules/desktop/gnome.nix
+    ../modules/desktop/hyprland.nix
+    ../modules/desktop/i3.nix
+    ../modules/hardware/audio.nix
+    ../modules/hardware/bluetooth.nix
+    ../modules/hardware/intel.nix
+    ../modules/hardware/keyboard.nix
+    ../modules/hardware/laptop.nix
+    ../modules/hardware/nvidia.nix
     ../modules/virtualization/docker.nix
     ../modules/virtualization/qemu.nix
   ];
@@ -58,17 +82,26 @@ in {
     kShell = {enable = cfg.enable;};
     kUser = {enable = cfg.enable;};
 
+    # Drivers
     kIntelDrivers = {enable = cfg.hardware.intel;};
     kKeyboard = {enable = cfg.hardware.keyboard;};
-    kLid = {enable = cfg.hardware.lid;};
+    kLaptop = {enable = cfg.hardware.laptop;};
     kNvidiaDrivers = {enable = cfg.hardware.nvidia;};
 
+    # Virtualization
     kQEMU = {enable = cfg.virtualization.qemu;};
     kDocker = {enable = cfg.virtualization.docker;};
 
+    # Extras
     kFirefox = {enable = cfg.extras.enable;};
     kSteam = {enable = cfg.extras.enable;};
 
+    # Desktops
+    kGnome = {enable = cfg.desktop == "gnome";};
+    ki3 = {enable = cfg.desktop == "i3";};
+    kHyprland = {enable = cfg.desktop == "hyprland";};
+
+    networking.hostName = cfg.hostname;
     boot = {
       # This is for OBS Virtual Cam Support
       kernelModules = ["v4l2loopback"];
@@ -114,7 +147,6 @@ in {
     };
 
     services = {
-      libinput = {enable = true;}; # Touchpad
       dbus = {enable = true;};
       envfs = {enable = true;};
       flatpak = {enable = false;};
@@ -138,6 +170,22 @@ in {
       fstrim = {
         enable = true;
         interval = "weekly";
+      };
+
+      xserver = {
+        displayManager = {
+          gdm.enable = cfg.login == "gdm";
+          lightdm.enable = cfg.login == "lightdm";
+        };
+      };
+
+      displayManager = {
+        sddm.enable = cfg.login == "sddm";
+      };
+
+      greetd = {
+        enable = cfg.login == "greetd";
+        vt = 3;
       };
     };
 

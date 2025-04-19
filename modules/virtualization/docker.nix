@@ -9,7 +9,11 @@ in {
   options.kDocker = {enable = lib.mkEnableOption "enable docker";};
 
   config = lib.mkIf cfg.enable {
-    environment = {systemPackages = [pkgs.lazydocker];};
+    environment = {
+      systemPackages = [
+        pkgs.lazydocker
+      ];
+    };
 
     boot.kernelModules = ["nf_tables" "x_tables" "iptable_filter" "iptable_nat"];
 

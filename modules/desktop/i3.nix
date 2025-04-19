@@ -6,13 +6,14 @@
 }: let
   cfg = config.ki3;
 in {
-  options.ki3 = {enable = lib.mkEnableOption "enable i3";};
+  options.ki3 = {
+    enable = lib.mkEnableOption "enable i3";
+  };
 
   config = lib.mkIf cfg.enable {
     environment.pathsToLink = ["/libexec"];
     services = {
       xserver = {
-
         desktopManager = {xterm = {enable = false;};};
         displayManager = {defaultSession = "none+i3";};
 
