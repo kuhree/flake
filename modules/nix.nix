@@ -48,7 +48,7 @@ in {
         keep-going = true;
         sandbox = true;
         warn-dirty = false;
-        show-trace = true;
+        show-trace = false;
 
         flake-registry = "/etc/nix/registry.json";
         commit-lockfile-summary = "chore: Update flake.lock";
