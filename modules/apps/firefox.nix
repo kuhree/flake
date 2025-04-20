@@ -130,7 +130,7 @@ in {
             };
             # Obsidian Web Clipper
             "clipper@obsidian.md" = {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/web_clipper_obsidian/latest.xpi";
+              install_url = "https://addons.mozilla.org/firefox/downloads/file/4462091/web_clipper_obsidian-0.11.3.xpi";
               installation_mode = "force_installed";
             };
             # Wakatime
@@ -142,9 +142,8 @@ in {
             # ---- AdBlocking ----
             # uBlock Origin
             "uBlock0@raymondhill.net" = {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock_origin/latest.xpi";
+              install_url = "https://addons.mozilla.org/firefox/downloads/file/4458450/ublock_origin-1.63.2.xpi";
               installation_mode = "force_installed";
-              private_browsing = true;
             };
             # SponsorBlock
             "sponsorBlocker@ajay.app" = {
@@ -165,7 +164,7 @@ in {
             };
             # LocalCDN
             "{b86e4813-687a-43e6-ab65-0bde4ab75758}" = {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/localcdn_fork_of_decentraleyes/latest.xpi";
+              install_url = "https://addons.mozilla.org/firefox/downloads/file/4464649/localcdn_fork_of_decentraleyes-2.6.79.xpi";
               installation_mode = "force_installed";
             };
           };
