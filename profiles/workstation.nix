@@ -108,16 +108,6 @@ in {
       # This is for OBS Virtual Cam Support
       kernelModules = ["v4l2loopback"];
       extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
-
-      # Appimage Support
-      binfmt.registrations.appimage = {
-        wrapInterpreterInShell = false;
-        interpreter = "${pkgs.appimage-run}/bin/appimage-run";
-        recognitionType = "magic";
-        offset = 0;
-        mask = "\\xff\\xff\\xff\\xff\\x00\\x00\\x00\\x00\\xff\\xff\\xff";
-        magicOrExtension = "\\x7fELF....AI\\x02";
-      };
     };
 
     zramSwap = {
@@ -151,10 +141,7 @@ in {
     services = {
       dbus = {enable = true;};
       envfs = {enable = true;};
-      flatpak = {enable = false;};
       gvfs = {enable = true;};
-      nfs = {server = {enable = false;};};
-      rpcbind = {enable = false;};
       tumbler = {enable = true;};
       upower = {enable = true;};
       udev = {enable = true;};
@@ -193,6 +180,7 @@ in {
     };
 
     programs = {
+      appimage = {enable = true;};
       mtr = {enable = true;};
       nm-applet = {indicator = true;};
       thunar = {

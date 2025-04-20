@@ -11,11 +11,14 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs = {
+      gnupg = {agent = {enable = true; enableSSHSupport = true;};};
+      git = {enable = true; lfs = true;};
       starship = {enable = true;};
       tmux = {enable = true;};
       zsh = {
         enable = true;
         enableCompletion = true;
+        enableBashCompletion = true;
         autosuggestions.enable = true;
         syntaxHighlighting.enable = true;
       };
