@@ -12,7 +12,7 @@ in {
 
     hostname = lib.mkOption {
       default = "nixos";
-      example = "thinkpad";
+      example = "nixos";
       description = "the hostname of the device";
       type = lib.types.str;
     };
@@ -76,11 +76,14 @@ in {
     kBoot = {enable = cfg.enable;};
     kFonts = {enable = cfg.enable;};
     kLocale = {enable = cfg.enable;};
-    kNet = {enable = cfg.enable;};
     kNix = {enable = cfg.enable;};
     kSecurity = {enable = cfg.enable;};
     kShell = {enable = cfg.enable;};
     kUser = {enable = cfg.enable;};
+    kNet = {
+      enable = cfg.enable;
+      hostname = cfg.hostname;
+    };
 
     # Drivers
     kIntelDrivers = {enable = cfg.hardware.intel;};
@@ -101,7 +104,6 @@ in {
     ki3 = {enable = cfg.desktop == "i3";};
     kHyprland = {enable = cfg.desktop == "hyprland";};
 
-    networking.hostName = cfg.hostname;
     boot = {
       # This is for OBS Virtual Cam Support
       kernelModules = ["v4l2loopback"];
