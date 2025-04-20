@@ -18,11 +18,19 @@ in {
         };
       };
 
-      gnome = {gnome-keyring = {enable = true;};};
+      gnome = {
+        gnome-keyring = {enable = true;};
+      };
     };
 
     environment = {
       systemPackages = kPkgs.gnome;
+    };
+
+    programs = {
+      dconf = {
+        enable = true;
+      };
     };
   };
 }

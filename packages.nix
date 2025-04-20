@@ -138,7 +138,9 @@
     # pkgs.qt6ct
   ];
 
-  gnome = [];
+  gnome = [
+    pkgs.gnome.gnome-tweaks
+  ];
 
   hyprland = [
     pkgs.hyprcursor

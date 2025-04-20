@@ -175,6 +175,7 @@ in {
       };
 
       xserver = {
+        enable = cfg.login == "gdm" || cfg.login == "lightdm";
         displayManager = {
           gdm.enable = cfg.login == "gdm";
           lightdm.enable = cfg.login == "lightdm";
