@@ -29,6 +29,7 @@
     pkgs.bitwarden-cli
     pkgs.curl
     pkgs.ffmpeg
+    pkgs.gcc
     pkgs.fzf
     pkgs.git
     pkgs.glow
