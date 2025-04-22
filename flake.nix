@@ -56,8 +56,15 @@
     kVars = import ./variables.nix {inherit inputs;};
   in {
     # Shell(s)
-    devShells."${pkgs.system}".default = pkgs.mkShell {
-      packages = kPkgs.shell ++ kPkgs.dev;
+    devShells = {
+      "${pkgs.system}" = {
+        default = pkgs.mkShell {
+          packages = kPkgs.shell ++ kPkgs.dev;
+          shellHoock = ''
+            exec zsh
+          '';
+        };
+      };
     };
 
     # Host(s)
