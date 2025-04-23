@@ -47,7 +47,7 @@ in {
         accept-flake-config = true;
         auto-optimise-store = true;
         builders-use-substitutes = true; # use binary cache, its not gentoo
-        commit-lock-file-summary = "chore: Update flake.lock";
+        commit-lockfile-summary = "chore: Update flake.lock";
         experimental-features = [ "flakes" "nix-command" ];
         flake-registry = "/etc/nix/registry.json";
         http-connections = 50;
