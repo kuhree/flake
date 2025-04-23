@@ -1,3 +1,4 @@
 .aider*
 result
 .env
+*.qcow2
