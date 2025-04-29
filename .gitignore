@@ -1,4 +1,5 @@
 .aider*
+.opencode
 result
 .env
 *.qcow2
