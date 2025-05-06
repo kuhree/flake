@@ -23,7 +23,7 @@ jobs:
         run: nix run nixpkgs#alejandra -- --check .
 
       - name: lint with nil
-        run: nix run nixpkgs#nil -- check .
+        run: find . -type f -wholename "**.nix" | xargs -I {} nix run 'nixpkgs#nil' -- diagnostics {}
 
       - name: notify status
         if: always()
