@@ -23,7 +23,7 @@
       "${pkgs.system}" = {
         default = pkgs.mkShell {
           packages = kPkgs.shell ++ kPkgs.dev;
-          shellHoock = ''
+          shellHook = ''
             exec zsh
           '';
         };
