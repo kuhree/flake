@@ -16,7 +16,6 @@
     };
 
     kPkgs = import ./packages.nix {inherit inputs pkgs;};
-    kVars = import ./variables.nix {inherit inputs;};
   in {
     # Shell(s)
     devShells = {
@@ -33,12 +32,12 @@
     # Host(s)
     nixosConfigurations = {
       thinkpad = inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs kPkgs kVars;};
+        specialArgs = {inherit inputs kPkgs;};
         modules = [./hosts/thinkpad/configuration.nix];
       };
 
       vm = inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs kPkgs kVars;};
+        specialArgs = {inherit inputs kPkgs;};
         modules = [./hosts/vm/configuration.nix];
       };
     };

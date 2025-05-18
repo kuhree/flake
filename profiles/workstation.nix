@@ -10,6 +10,27 @@ in {
   options.kWorkstation = {
     enable = lib.mkEnableOption "workstation setup";
 
+    username = lib.mkOption {
+      default = "kuhree";
+      example = "kuhree";
+      description = "the username for the primary user";
+      type = lib.types.str;
+    };
+
+    locale = lib.mkOption {
+      default = "en_US.UTF-8";
+      example = "en_US.UTF-8";
+      description = "the primary locale for the device";
+      type = lib.types.str;
+    };
+
+    timezone = lib.mkOption {
+      default = "America/New_York";
+      example = "America/New_York";
+      description = "the primary timezone for the device";
+      type = lib.types.str;
+    };
+
     hostname = lib.mkOption {
       default = "nixos";
       example = "nixos";
@@ -75,11 +96,18 @@ in {
     kBluetooth = {enable = cfg.enable;};
     kBoot = {enable = cfg.enable;};
     kFonts = {enable = cfg.enable;};
-    kLocale = {enable = cfg.enable;};
     kNix = {enable = cfg.enable;};
     kSecurity = {enable = cfg.enable;};
     kShell = {enable = cfg.enable;};
-    kUser = {enable = cfg.enable;};
+    kUser = {
+      enable = cfg.enable;
+      username = cfg.username;
+    };
+    kLocale = {
+      enable = cfg.enable;
+      timezone = cfg.timezone;
+      locale = cfg.locale;
+    };
     kNet = {
       enable = cfg.enable;
       hostname = cfg.hostname;
@@ -97,12 +125,18 @@ in {
 
     # Extras
     kFirefox = {enable = cfg.extras.enable;};
-    kSteam = {enable = cfg.extras.enable;};
+    kSteam = {
+      enable = cfg.extras.enable;
+      username = cfg.username;
+    };
 
     # Desktops
     kGnome = {enable = cfg.desktop == "gnome";};
     ki3 = {enable = cfg.desktop == "i3";};
-    kHyprland = {enable = cfg.desktop == "hyprland";};
+    kHyprland = {
+      enable = cfg.desktop == "hyprland";
+      username = cfg.username;
+    };
 
     boot = {
       # This is for OBS Virtual Cam Support

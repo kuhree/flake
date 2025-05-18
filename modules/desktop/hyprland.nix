@@ -3,13 +3,18 @@
   config,
   pkgs,
   kPkgs,
-  kVars,
   ...
 }: let
   cfg = config.kHyprland;
 in {
   options.kHyprland = {
     enable = lib.mkEnableOption "enable hyprland";
+    username = lib.mkOption {
+      default = "kuhree";
+      example = "kuhree";
+      description = "the username for the primary user";
+      type = lib.types.str;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -30,7 +35,7 @@ in {
       greetd = {
         settings = {
           default_session = {
-            user = kVars.username;
+            user = cfg.username;
             command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-session --cmd '${pkgs.uwsm}/bin/uwsm start default'";
           };
         };

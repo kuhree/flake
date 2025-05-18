@@ -2,12 +2,19 @@
   lib,
   config,
   pkgs,
-  kVars,
   ...
 }: let
   cfg = config.kUser;
 in {
-  options.kUser = {enable = lib.mkEnableOption "enable common user account";};
+  options.kUser = {
+    enable = lib.mkEnableOption "enable common user account";
+    username = lib.mkOption {
+      default = "kuhree";
+      example = "kuhree";
+      description = "the username for the primary user";
+      type = lib.types.str;
+    };
+  };
 
   config = lib.mkIf cfg.enable {
     users = {
@@ -16,7 +23,7 @@ in {
       users = {
         root = {initialPassword = "nixos";};
 
-        "${kVars.username}" = {
+        "${cfg.username}" = {
           uid = 1000;
           isNormalUser = true;
           initialPassword = "nixos";

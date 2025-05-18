@@ -6,6 +6,9 @@
 
   kWorkstation = {
     enable = true;
+    username = "kuhree";
+    timezone = "America/New_York";
+    locale = "en_US.UTF-8";
     hostname = "thinkpad";
     login = "greetd";
     desktop = "hyprland";
