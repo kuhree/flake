@@ -11,6 +11,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs = {
+      direnv = {
+        enable = true;
+      };
       git = {
         enable = true;
         lfs = {enable = true;};
