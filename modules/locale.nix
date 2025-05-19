@@ -29,7 +29,6 @@ in {
       defaultLocale = cfg.locale;
 
       extraLocaleSettings = {
-        LL_ALL = "C";
         LC_ADDRESS = cfg.locale;
         LC_IDENTIFICATION = cfg.locale;
         LC_MEASUREMENT = cfg.locale;
