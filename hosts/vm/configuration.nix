@@ -21,10 +21,17 @@
   kNet = {enable = true;};
   kSecurity = {enable = true;};
   kShell = {enable = true;};
-  kLocale = {enable = true;};
-  kUser = {enable = true;};
   kGuest = {enable = true;};
   kDocker = {enable = true;};
+  kUser = {
+    enable = true;
+    username = "kuhree";
+  };
+  kLocale = {
+    enable = true;
+    locale = "en_US.UTF-8";
+    hostname = "thinkpad";
+  };
 
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
