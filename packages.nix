@@ -149,7 +149,7 @@
     pkgs.hyprland-protocols
     pkgs.hyprpicker
     pkgs.rofi-wayland
-    pkgs.swaynotificationcenter
+    pkgs.mako
     pkgs.swww
     pkgs.wlogout
     pkgs.wlr-randr
