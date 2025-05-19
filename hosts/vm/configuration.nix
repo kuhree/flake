@@ -29,8 +29,8 @@
   };
   kLocale = {
     enable = true;
+    timezone = "America/New_York";
     locale = "en_US.UTF-8";
-    hostname = "thinkpad";
   };
 
   virtualisation.vmVariant = {
