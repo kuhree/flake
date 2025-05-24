@@ -229,7 +229,7 @@ in {
       mtr.enable = true;
       nm-applet.indicator = hasCustomTray;
       thunar = {
-        enable = true;
+        enable = hasCustomTray;
         plugins = [
           pkgs.xfce.exo
           pkgs.xfce.mousepad
