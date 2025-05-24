@@ -58,9 +58,11 @@ in {
     };
 
     systemd = {
-      # WE DONT WANT TO BUILD STUFF ON TMPFS
-      # ITS NOT A GOOD IDEA
-      services.nix-daemon = {environment.TMPDIR = "/var/tmp";};
+      services.nix-daemon = {
+        # WE DONT WANT TO BUILD STUFF ON TMPFS
+        # ITS NOT A GOOD IDEA
+        environment.TMPDIR = "/var/tmp";
+      };
     };
 
     system = {
@@ -72,6 +74,12 @@ in {
       # this makes rebuilds little faster
       switch = {
         enable = false;
+        enableNg = true;
+      };
+
+      rebuild = {
+        # replace `nixos-rebuild` with `nixos-rebuild-ng`.
+        # Will be default behaviour in future release.
         enableNg = true;
       };
     };

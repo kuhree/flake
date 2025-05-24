@@ -48,8 +48,8 @@ in {
     desktop = lib.mkOption {
       default = "gnome";
       example = "gnome";
-      description = "the desktop to use (greetd/gdm/lightdm/sddm)";
-      type = lib.types.enum ["gnome" "i3" "hyprland"];
+      description = "the desktop to use (gnome/i3/hyprland/cosmic)";
+      type = lib.types.enum ["gnome" "i3" "hyprland" "cosmic"];
     };
 
     hardware = {
@@ -81,6 +81,7 @@ in {
     ../modules/desktop/gnome.nix
     ../modules/desktop/hyprland.nix
     ../modules/desktop/i3.nix
+    ../modules/desktop/cosmic.nix
     ../modules/hardware/audio.nix
     ../modules/hardware/bluetooth.nix
     ../modules/hardware/intel.nix
@@ -131,8 +132,9 @@ in {
     };
 
     # Desktops
-    kGnome = {enable = cfg.desktop == "gnome";};
-    ki3 = {enable = cfg.desktop == "i3";};
+    kCosmic.enable = cfg.desktop == "cosmic";
+    kGnome.enable = cfg.desktop == "gnome";
+    ki3.enable = cfg.desktop == "i3";
     kHyprland = {
       enable = cfg.desktop == "hyprland";
       username = cfg.username;
