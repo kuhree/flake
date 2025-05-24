@@ -6,6 +6,9 @@
   ...
 }: let
   cfg = config.kWorkstation;
+
+  # If true, adds sys tray applets.
+  hasCustomTray = cfg.desktop != "cosmic" && cfg.desktop != "gnome";
 in {
   imports = [
     ../modules/boot.nix
@@ -95,13 +98,16 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    kAudio = {enable = cfg.enable;};
-    kBluetooth = {enable = cfg.enable;};
-    kBoot = {enable = cfg.enable;};
-    kFonts = {enable = cfg.enable;};
-    kNix = {enable = cfg.enable;};
-    kSecurity = {enable = cfg.enable;};
-    kShell = {enable = cfg.enable;};
+    kAudio.enable = cfg.enable;
+    kBluetooth = {
+      enable = cfg.enable;
+      applet = hasCustomTray;
+    };
+    kBoot.enable = cfg.enable;
+    kFonts.enable = cfg.enable;
+    kNix.enable = cfg.enable;
+    kSecurity.enable = cfg.enable;
+    kShell.enable = cfg.enable;
     kUser = {
       enable = cfg.enable;
       username = cfg.username;
@@ -117,17 +123,17 @@ in {
     };
 
     # Drivers
-    kIntelDrivers = {enable = cfg.hardware.intel;};
-    kKeyboard = {enable = cfg.hardware.keyboard;};
-    kLaptop = {enable = cfg.hardware.laptop;};
-    kNvidiaDrivers = {enable = cfg.hardware.nvidia;};
+    kIntelDrivers.enable = cfg.hardware.intel;
+    kKeyboard.enable = cfg.hardware.keyboard;
+    kLaptop.enable = cfg.hardware.laptop;
+    kNvidiaDrivers.enable = cfg.hardware.nvidia;
 
     # Virtualization
-    kQEMU = {enable = cfg.virtualization.qemu;};
-    kDocker = {enable = cfg.virtualization.docker;};
+    kQEMU.enable = cfg.virtualization.qemu;
+    kDocker.enable = cfg.virtualization.docker;
 
     # Extras
-    kFirefox = {enable = cfg.extras.enable;};
+    kFirefox.enable = cfg.extras.enable;
     kSteam = {
       enable = cfg.extras.enable;
       username = cfg.username;
@@ -221,7 +227,7 @@ in {
     programs = {
       appimage.enable = true;
       mtr.enable = true;
-      nm-applet.indicator = true;
+      nm-applet.indicator = hasCustomTray;
       thunar = {
         enable = true;
         plugins = [

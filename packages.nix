@@ -98,7 +98,7 @@
     pkgs.libnotify
     pkgs.libva-utils
     pkgs.mpv
-    pkgs.networkmanagerapplet
+    # pkgs.networkmanagerapplet
     pkgs.pamixer
     pkgs.pavucontrol
     pkgs.playerctl

@@ -5,10 +5,17 @@
 }: let
   cfg = config.kBluetooth;
 in {
-  options.kBluetooth = {enable = lib.mkEnableOption "enable bluetooth";};
+  options.kBluetooth = {
+    enable = lib.mkEnableOption "enable bluetooth";
+    applet = lib.mkEnableOption "enable bluetooth applet";
+  };
 
   config = lib.mkIf cfg.enable {
-    services = {blueman = {enable = true;};};
+    services = {
+      blueman = {
+        enable = cfg.applet;
+      };
+    };
 
     hardware = {
       bluetooth = {
