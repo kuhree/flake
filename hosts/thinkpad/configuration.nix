@@ -10,9 +10,13 @@
     timezone = "America/New_York";
     locale = "en_US.UTF-8";
     hostname = "thinkpad";
-    login = "greetd";
-    desktop = "hyprland";
-    extras = {enable = true;};
+    # login = "greetd";
+    # desktop = "hyprland";
+    login = "cosmic";
+    desktop = "cosmic";
+    extras = {
+      enable = true;
+    };
 
     hardware = {
       laptop = true;

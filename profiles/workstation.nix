@@ -7,6 +7,31 @@
 }: let
   cfg = config.kWorkstation;
 in {
+  imports = [
+    ../modules/boot.nix
+    ../modules/fonts.nix
+    ../modules/locale.nix
+    ../modules/networking.nix
+    ../modules/nix.nix
+    ../modules/security.nix
+    ../modules/shell.nix
+    ../modules/user.nix
+    ../modules/apps/firefox.nix
+    ../modules/apps/steam.nix
+    ../modules/desktop/gnome.nix
+    ../modules/desktop/hyprland.nix
+    ../modules/desktop/i3.nix
+    ../modules/desktop/cosmic.nix
+    ../modules/hardware/audio.nix
+    ../modules/hardware/bluetooth.nix
+    ../modules/hardware/intel.nix
+    ../modules/hardware/keyboard.nix
+    ../modules/hardware/laptop.nix
+    ../modules/hardware/nvidia.nix
+    ../modules/virtualization/docker.nix
+    ../modules/virtualization/qemu.nix
+  ];
+
   options.kWorkstation = {
     enable = lib.mkEnableOption "workstation setup";
 
@@ -41,8 +66,8 @@ in {
     login = lib.mkOption {
       default = "greetd";
       example = "greetd";
-      description = "the display manager to use (greetd/gdm/lightdm/sddm)";
-      type = lib.types.enum ["greetd" "gdm" "lightdm" "sddm"];
+      description = "the display manager to use (greetd/gdm/lightdm/sddm/cosmic)";
+      type = lib.types.enum ["greetd" "gdm" "lightdm" "sddm" "cosmic"];
     };
 
     desktop = lib.mkOption {
@@ -64,33 +89,10 @@ in {
       docker = lib.mkEnableOption "docker host";
     };
 
-    extras = {enable = lib.mkEnableOption "extra apps, config, spicy stuff";};
+    extras = {
+      enable = lib.mkEnableOption "extra apps, config, spicy stuff";
+    };
   };
-
-  imports = [
-    ../modules/boot.nix
-    ../modules/fonts.nix
-    ../modules/locale.nix
-    ../modules/networking.nix
-    ../modules/nix.nix
-    ../modules/security.nix
-    ../modules/shell.nix
-    ../modules/user.nix
-    ../modules/apps/firefox.nix
-    ../modules/apps/steam.nix
-    ../modules/desktop/gnome.nix
-    ../modules/desktop/hyprland.nix
-    ../modules/desktop/i3.nix
-    ../modules/desktop/cosmic.nix
-    ../modules/hardware/audio.nix
-    ../modules/hardware/bluetooth.nix
-    ../modules/hardware/intel.nix
-    ../modules/hardware/keyboard.nix
-    ../modules/hardware/laptop.nix
-    ../modules/hardware/nvidia.nix
-    ../modules/virtualization/docker.nix
-    ../modules/virtualization/qemu.nix
-  ];
 
   config = lib.mkIf cfg.enable {
     kAudio = {enable = cfg.enable;};
@@ -175,16 +177,16 @@ in {
     };
 
     services = {
-      dbus = {enable = true;};
-      envfs = {enable = true;};
-      gvfs = {enable = true;};
-      tumbler = {enable = true;};
-      upower = {enable = true;};
-      udev = {enable = true;};
+      dbus.enable = true;
+      envfs.enable = true;
+      gvfs.enable = true;
+      tumbler.enable = true;
+      upower.enable = true;
+      udev.enable = true;
 
       gnome = {
-        sushi = {enable = true;};
-        gnome-keyring = {enable = true;};
+        sushi.enable = true;
+        gnome-keyring.enable = true;
       };
 
       smartd = {
@@ -207,6 +209,7 @@ in {
 
       displayManager = {
         sddm.enable = cfg.login == "sddm";
+        cosmic-greeter.enable = cfg.login == "cosmic";
       };
 
       greetd = {
@@ -216,9 +219,9 @@ in {
     };
 
     programs = {
-      appimage = {enable = true;};
-      mtr = {enable = true;};
-      nm-applet = {indicator = true;};
+      appimage.enable = true;
+      mtr.enable = true;
+      nm-applet.indicator = true;
       thunar = {
         enable = true;
         plugins = [
