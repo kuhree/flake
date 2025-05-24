@@ -10,6 +10,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    services.greetd.enable = lib.mkForce true;
     services.desktopManager.cosmic.enable = true;
   };
 }
