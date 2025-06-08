@@ -80,7 +80,7 @@
   ];
 
   gui = [
-    inputs.zen-browser.packages."${pkgs.system}".beta
+    # inputs.zen-browser.packages."${pkgs.system}".beta
     pkgs.bitwarden-desktop
     pkgs.brave
     pkgs.ghostty # inputs.ghostty.packages."${pkgs.system}".default

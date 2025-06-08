@@ -19,7 +19,6 @@ in {
       };
 
       gnome = {
-        core-apps.enable = true;
         gnome-keyring.enable = true;
       };
     };

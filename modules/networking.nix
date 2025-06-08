@@ -34,6 +34,7 @@ in {
       #   wlp5s0 = {useDHCP = true;};
       # };
 
+      wireless.enable = true;
       networkmanager = {
         enable = true;
         unmanaged = ["docker0" "rndis0" "tailscale0"];
