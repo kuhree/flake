@@ -29,11 +29,6 @@ in {
       hostName = cfg.hostname;
       nftables = {enable = true;};
 
-      # Commented out -- Enables systemd-networkd
-      interfaces = {
-        wlp5s0 = {useDHCP = true;};
-      };
-
       wireless.enable = true;
       networkmanager = {
         enable = true;

@@ -10,8 +10,8 @@
     timezone = "America/New_York";
     locale = "en_US.UTF-8";
     hostname = "thinkpad";
-    login = "gdm"; # greetd
-    desktop = "gnome"; # "hyprland"
+    login = "cosmic"; # greetd
+    desktop = "cosmic"; # "hyprland"
     extras = {
       enable = true;
     };
