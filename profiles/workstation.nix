@@ -206,14 +206,14 @@ in {
       };
 
       xserver = {
-        enable = cfg.login == "gdm" || cfg.login == "lightdm";
+        enable = cfg.login == "lightdm";
         displayManager = {
-          gdm.enable = cfg.login == "gdm";
           lightdm.enable = cfg.login == "lightdm";
         };
       };
 
       displayManager = {
+        gdm.enable = cfg.login == "gdm";
         sddm.enable = cfg.login == "sddm";
         cosmic-greeter.enable = cfg.login == "cosmic";
       };

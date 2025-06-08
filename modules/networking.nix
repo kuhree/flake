@@ -28,10 +28,11 @@ in {
     networking = {
       hostName = cfg.hostname;
       nftables = {enable = true;};
-      interfaces = {
-        wlp5s0 = {useDHCP = true;};
-        tailscale0 = {useDHCP = false;};
-      };
+
+      # Commented out -- Enables systemd-networkd
+      # interfaces = {
+      #   wlp5s0 = {useDHCP = true;};
+      # };
 
       networkmanager = {
         enable = true;
