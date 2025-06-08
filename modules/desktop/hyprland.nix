@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  kPkgs,
   ...
 }: let
   cfg = config.kHyprland;
@@ -72,7 +71,27 @@ in {
         uwsm
       '';
 
-      systemPackages = kPkgs.wayland ++ kPkgs.hyprland;
+      systemPackages = [
+        pkgs.hyprcursor
+        pkgs.hypridle
+        pkgs.hyprland-protocols
+        pkgs.hyprpicker
+        pkgs.rofi-wayland
+        pkgs.mako
+        pkgs.swww
+        pkgs.wlogout
+        pkgs.wlr-randr
+        pkgs.wlsunset
+        pkgs.udiskie
+        # clipboard
+        pkgs.cliphist
+        pkgs.wl-clipboard
+        # scrot
+        pkgs.grim
+        pkgs.grimblast
+        pkgs.slurp
+        pkgs.swappy
+      ];
     };
 
     hardware = {

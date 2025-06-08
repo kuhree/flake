@@ -1,5 +1,5 @@
 {
-  inputs,
+  # inputs,
   pkgs,
   ...
 }: {
@@ -137,36 +137,5 @@
     # pkgs.qt6.qtwayland
     # pkgs.qt6Packages.qtstyleplugin-kvantum # kvantum
     # pkgs.qt6ct
-  ];
-
-  gnome = [
-    pkgs.gnome.gnome-tweaks
-  ];
-
-  hyprland = [
-    pkgs.hyprcursor
-    pkgs.hypridle
-    pkgs.hyprland-protocols
-    pkgs.hyprpicker
-    pkgs.rofi-wayland
-    pkgs.mako
-    pkgs.swww
-    pkgs.wlogout
-    pkgs.wlr-randr
-    pkgs.wlsunset
-    # clipboard
-    pkgs.cliphist
-    pkgs.wl-clipboard
-    # scrot
-    pkgs.grim
-    pkgs.grimblast
-    pkgs.slurp
-    pkgs.swappy
-  ];
-
-  x11 = [];
-
-  wayland = [
-    pkgs.udiskie
   ];
 }

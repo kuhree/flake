@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  kPkgs,
+  pkgs,
   ...
 }: let
   cfg = config.kGnome;
@@ -12,25 +12,14 @@ in {
 
   config = lib.mkIf cfg.enable {
     services = {
-      xserver = {
-        desktopManager.gnome = {
-          enable = true;
-        };
-      };
-
-      gnome = {
-        gnome-keyring.enable = true;
-      };
+      desktopManager.gnome.enable = true;
+      gnome.core-apps.enable = true;
     };
 
-    environment = {
-      systemPackages = kPkgs.gnome;
-    };
+    environment.systemPackages = [
+      pkgs.gnome-tweaks
+    ];
 
-    programs = {
-      dconf = {
-        enable = true;
-      };
-    };
+    programs.dconf.enable = true;
   };
 }
